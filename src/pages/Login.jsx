@@ -1,24 +1,30 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthContextProvider"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { auth } from "../config/firebase"
+
 
 const Login = () => {
     const [input, setInput] = useState({ email: '', password: '' })
+    const { user, handleLogin } = useContext(AuthContext)
+    let navigate = useNavigate();
 
-    const { handleLogin } = useContext(AuthContext)
-    const navigate = useNavigate();
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [user])
+
     const handleChange = (e) => {
         setInput({ ...input, [e.target.id]: e.target.value })
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        let user = await handleLogin(input.email, input.password)
-        if (user) {
-            navigate("/")
-        }
+        let res = await handleLogin(input.email, input.password)
     }
-
+    
     return (
         <div className="my-10">
             <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
