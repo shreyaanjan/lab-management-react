@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react"
-import Login from "../pages/Login"
 import { AuthContext } from "../context/AuthContextProvider"
 import { useNavigate } from "react-router"
 
