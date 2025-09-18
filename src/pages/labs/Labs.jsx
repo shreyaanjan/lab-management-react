@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { LabContext } from "../context/LabContextProvider"
+import { LabContext } from "../../context/LabContextProvider"
 
 const Labs = () => {
     const navigate = useNavigate()

@@ -1,18 +1,20 @@
 import { useContext, useEffect, useState } from "react"
-import { LabContext } from "../context/LabContextProvider"
+import { LabContext } from "../../context/LabContextProvider"
 import { useNavigate, useParams } from "react-router-dom"
 import { doc, getDoc } from "firebase/firestore"
-import { db } from "../config/firebase"
+import { db } from "../../config/firebase"
 import { toast } from "react-toastify"
 
-const AddLab = () => {
+const ManageLab = () => {
     const [input, setInput] = useState({ name: '', capacity: '', location: '' })
     const [isEdit, setIsEdit] = useState(false)
     const { labId } = useParams()
     const { addLab, updateLab } = useContext(LabContext)
 
     useEffect(() => {
-        getLab()
+        if (labId) {
+            getLab()
+        }
     }, [labId])
 
     const getLab = async () => {
@@ -72,4 +74,4 @@ const AddLab = () => {
     )
 }
 
-export default AddLab
+export default ManageLab

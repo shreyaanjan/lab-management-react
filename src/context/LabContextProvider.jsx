@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where, writeBatch } from "firebase/firestore"
 import { createContext, useEffect, useState } from "react"
 import { db } from "../config/firebase"
 import { toast } from "react-toastify"
@@ -16,9 +16,11 @@ const LabContextProvider = ({ children }) => {
 
     const addLab = async (input) => {
         try {
+            const { capacity, ...data } = input
             const obj = {
-                ...input,
-                createdAt: new Date()
+                ...data,
+                capacity: Number(capacity),
+                createdAt: new Date(),
             }
             await addDoc(collectionRef, obj)
             fetchLab()
@@ -46,6 +48,15 @@ const LabContextProvider = ({ children }) => {
 
     const deleteLab = async (labId) => {
         try {
+            const qry = query(collection(db, "pcs"), where("labId", "==", labId))
+            const toUpdateSnapShot = await getDocs(qry)
+            
+            const batch = writeBatch(db)
+            toUpdateSnapShot.forEach((pcDoc) => {
+                batch.update(pcDoc.ref, { labId: null })
+            })
+            batch.commit()
+            
             await deleteDoc(doc(db, "labs", labId))
             fetchLab()
         } catch (error) {
@@ -64,7 +75,7 @@ const LabContextProvider = ({ children }) => {
         }
     }
 
-    const value = { addLab, labs, deleteLab, updateLab }
+    const value = { addLab, labs, deleteLab, updateLab, fetchLab }
     return (
         <LabContext.Provider value={value}>
             {children}
