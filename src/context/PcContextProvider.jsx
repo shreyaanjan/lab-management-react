@@ -7,10 +7,10 @@ import { toast } from "react-toastify"
 export const PcContext = createContext()
 
 const PcContextProvider = ({ children }) => {
+    const [flag, setFlag] = useState(false)
     const [pcs, setPcs] = useState([])
     const collectionRef = (collection(db, "pcs"))
     const { labs, fetchLab } = useContext(LabContext)
-    console.log(labs);
 
     useEffect(() => {
         fetchPc()
@@ -20,10 +20,11 @@ const PcContextProvider = ({ children }) => {
         try {
             await addDoc(collectionRef, {
                 createdAt: new Date(),
-                ...pc
+                ...pc,
+                status: "Available"
             })
             await updateDoc(doc(db, "labs", pc.labId), {
-                capacity: increment(-1)
+                spaceLeft: increment(-1)
             })
             fetchPc()
             fetchLab()
@@ -49,31 +50,31 @@ const PcContextProvider = ({ children }) => {
         }
     }
 
-    const deletePc = async (pcId) => {
+    const deletePc = async (pcId, labId) => {
         try {
-            const qry = query(collection(db, "students"), where("pcId", "==", pcId))
-            const toUpdateSnapShot = await getDocs(qry)
-
-            const batch = writeBatch(db)
-            toUpdateSnapShot.forEach((studentDoc) => {
-                batch.update(studentDoc.ref, { pcId: null })
-            })
-            batch.commit()
-
             await deleteDoc(doc(db, "pcs", pcId))
+            if (labId) {
+                await updateDoc(doc(db, "labs", labId), {
+                    spaceLeft: increment(1)
+                })
+            }
             fetchPc()
+            fetchLab()
         } catch (error) {
             console.log(error);
             toast.error("Something Went Wrong !")
         }
     }
 
-    const updatePc = async (pcId, updatedVal) => {
+    const updatePc = async (pcId, updatedVal, labId) => {
         try {
 
             await updateDoc(doc(db, "pcs", pcId), updatedVal)
             await updateDoc(doc(db, "labs", updatedVal.labId), {
-                capacity: increment(-1)
+                spaceLeft: increment(-1)
+            })
+            await updateDoc(doc(db, "labs", labId), {
+                spaceLeft: increment(1)
             })
             fetchPc()
             fetchLab()
@@ -93,8 +94,18 @@ const PcContextProvider = ({ children }) => {
             return "Not Assigned"
         }
     }
+    const handleStatus = async (pcId) => {
+        await updateDoc(doc(db, "pcs", pcId), { status: "in-Repair" })
+        setFlag(true)
+        fetchPc()
+    }
+    const handleAvail = async (pcId) => {
+        await updateDoc(doc(db, "pcs", pcId), { status: "Available" })
+        setFlag(false)
+        fetchPc()
+    }
 
-    const value = { addPc, pcs, deletePc, updatePc, showLab, fetchPc }
+    const value = { addPc, pcs, deletePc, updatePc, showLab, fetchPc, handleStatus, handleAvail, flag }
     return (
         <PcContext.Provider value={value}>
             {children}

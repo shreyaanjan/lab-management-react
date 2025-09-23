@@ -2,6 +2,7 @@ import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase
 import { createContext, useContext, useEffect, useState } from "react"
 import { db } from "../config/firebase"
 import { PcContext } from "./PcContextProvider"
+import { toast } from "react-toastify"
 
 export const studentContext = createContext()
 
@@ -58,7 +59,7 @@ const StudentContextProvider = ({ children }) => {
         }
     }
 
-    const updateStudent = async (studentId, updatedVal) => {
+    const updateStudent = async (updatedVal, studentId) => {
         try {
             await updateDoc(doc(db, "students", studentId), updatedVal)
             fetchStudent()
@@ -69,10 +70,14 @@ const StudentContextProvider = ({ children }) => {
     }
 
     const showPc = (pcId) => {
-        const pcName = pcs.find((pc) => {
-            return pcId == pc.pcId
-        })
-        return pcName?.name ? pcName?.name : "Not Assigned";
+        if (pcs.length !== 0) {
+            const pcName = pcs.find((pc) => {
+                return pcId == pc.pcId
+            })
+            return pcName?.name ? pcName?.name : "Not Assigned";
+        } else {
+            return "Not Assigned"
+        }
     }
 
     const value = { students, addStudent, showPc, deleteStudent, updateStudent }

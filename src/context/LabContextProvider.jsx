@@ -21,6 +21,7 @@ const LabContextProvider = ({ children }) => {
                 ...data,
                 capacity: Number(capacity),
                 createdAt: new Date(),
+                spaceLeft: Number(capacity)
             }
             await addDoc(collectionRef, obj)
             fetchLab()
@@ -55,7 +56,7 @@ const LabContextProvider = ({ children }) => {
             toUpdateSnapShot.forEach((pcDoc) => {
                 batch.update(pcDoc.ref, { labId: null })
             })
-            batch.commit()
+            await batch.commit()
             
             await deleteDoc(doc(db, "labs", labId))
             fetchLab()

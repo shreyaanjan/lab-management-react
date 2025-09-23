@@ -24,7 +24,7 @@ const App = () => {
                 <Route path="/edit-lab/:labId" element={<ProtectedRoutes Component={ManageLab} />} />
                 <Route path="/pcs" element={<ProtectedRoutes Component={Pcs} />} />
                 <Route path="/add-pc" element={<ProtectedRoutes Component={ManagePcs} />} />
-                <Route path="/edit-pc/:pcId" element={<ProtectedRoutes Component={ManagePcs} />} />
+                <Route path="/edit-pc/:pcId/:labId" element={<ProtectedRoutes Component={ManagePcs} />} />
                 <Route path="/students" element={<ProtectedRoutes Component={Students} />} />
                 <Route path="/add-student" element={<ProtectedRoutes Component={ManageStudents} />} />
                 <Route path="/edit-student/:studentId" element={<ProtectedRoutes Component={ManageStudents} />} />
