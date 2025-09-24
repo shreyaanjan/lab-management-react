@@ -1,122 +1,109 @@
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { useContext } from "react";
 import { LabContext } from "../context/LabContextProvider";
 import { PcContext } from "../context/PcContextProvider";
 import { studentContext } from "../context/StudentContextProvider";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
-export default function Dashboard() {
+export default function DashboardChart() {
   const { labs } = useContext(LabContext);
   const { pcs } = useContext(PcContext);
   const { students } = useContext(studentContext);
 
-  const recentActivity = [
-    "Student A assigned to PC-12 in Lab 1",
-    "Student B released PC-7 from Lab 2",
-    "New Lab 'AI Research' created",
+  const navigate = useNavigate()
+
+  const data = [
+    { name: "Labs", value: labs.length },
+    { name: "PCs", value: pcs.length },
+    { name: "Students", value: students.length },
   ];
 
+  const COLORS = ["#3b82f6", "#10b981", "#8b5cf6"];
+
   return (
-    <div className="bg-[#0F172A] min-h-screen text-slate-100">
-      <div className="container mx-auto">
-        <div className="p-8 space-y-8">
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="bg-[#1E293B] shadow rounded-xl p-6">
-              <p className="text-slate-400">Total Labs</p>
-              <h2 className="text-4xl font-bold text-purple-400">
-                {labs.length}
-              </h2>
-            </div>
-            <div className="bg-[#1E293B] shadow rounded-xl p-6">
-              <p className="text-slate-400">Total PCs</p>
-              <h2 className="text-4xl font-bold text-cyan-400">
-                {pcs.length}
-              </h2>
-            </div>
-            <div className="bg-[#1E293B] shadow rounded-xl p-6">
-              <p className="text-slate-400">Total Students</p>
-              <h2 className="text-4xl font-bold text-pink-400">
-                {students.length}
-              </h2>
-            </div>
+    <div className="container mx-auto p-4">
+      <div className="flex flex-col md:flex-row items-center justify-between mb-6">
+        <div className="flex gap-10 text-center">
+          <div>
+            <p className="text-sm text-gray-500">Labs</p>
+            <p className="text-2xl font-bold text-blue-600">{labs.length}</p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="bg-[#1E293B] shadow rounded-xl p-6">
-              <h3 className="text-lg font-semibold mb-2">PC Usage</h3>
-              <div className="w-full bg-slate-700 rounded-full h-3">
-                <div
-                  className="bg-cyan-400 h-3 rounded-full"
-                  style={{ width: `${(pcs.length / 100) * 100}%` }}
-                />
-              </div>
-              <p className="text-sm text-slate-400 mt-2">
-                {pcs.length}/100 PCs assigned
-              </p>
-            </div>
-
-            <div className="bg-[#1E293B] shadow rounded-xl p-6">
-              <h3 className="text-lg font-semibold mb-2">
-                Student Registration
-              </h3>
-              <div className="w-full bg-slate-700 rounded-full h-3">
-                <div
-                  className="bg-pink-400 h-3 rounded-full"
-                  style={{ width: `${(students.length / 200) * 100}%` }}
-                />
-              </div>
-              <p className="text-sm text-slate-400 mt-2">
-                {students.length}/200 students
-              </p>
-            </div>
+          <div>
+            <p className="text-sm text-gray-500">PCs</p>
+            <p className="text-2xl font-bold text-green-600">{pcs.length}</p>
           </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="bg-[#1E293B] shadow rounded-xl p-6">
-              <h3 className="text-lg font-semibold mb-4">Recent Activity</h3>
-              <ul className="space-y-3 text-sm text-slate-200">
-                {recentActivity.map((item, idx) => (
-                  <li
-                    key={idx}
-                    className="border-l-4 border-purple-400 pl-3 bg-purple-900/30 rounded-r"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="bg-[#1E293B] shadow rounded-xl p-6 overflow-x-auto">
-              <h3 className="text-lg font-semibold mb-4">Lab Details</h3>
-              <table className="w-full text-sm text-left border-collapse">
-                <thead>
-                  <tr className="bg-slate-800 text-slate-200">
-                    <th className="py-2 px-3">Lab Name</th>
-                    <th className="py-2 px-3">Capacity</th>
-                    <th className="py-2 px-3">Location</th>
+          <div>
+            <p className="text-sm text-gray-500">Students</p>
+            <p className="text-2xl font-bold text-purple-600">{students.length}</p>
+          </div>
+        </div>
+        <div className="flex gap-2 mt-4 md:mt-0">
+          <button onClick={() => navigate("/labs")} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+            View Lab
+          </button>
+          <button onClick={() => navigate("/pcs")} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
+            View PC
+          </button>
+          <button onClick={() => navigate("/students")} className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg">
+            View Student
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-col lg:flex-row gap-5">
+        <div className="bg-yellow-100 w-full lg:w-4/12 shadow-lg rounded-lg p-6">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">System Overview</h2>
+          <div className="w-full h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={data}
+                  cx="50%"
+                  cy="50%"
+                  outerRadius="80%"
+                  fill="#8884d8"
+                  dataKey="value"
+                  label
+                >
+                  {data.map((entry, index) => (
+                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        <div className="bg-yellow-100 w-full lg:w-8/12 shadow-lg rounded-lg p-6">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">Lab Details</h2>
+          <div className="w-full h-64 overflow-y-auto scrollbar">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">Number</th>
+                    <th scope="col" className="px-6 py-3">Name</th>
+                    <th scope="col" className="px-6 py-3">Capacity</th>
+                    <th scope="col" className="px-6 py-3">Location</th>
                   </tr>
                 </thead>
                 <tbody>
                   {labs.map((lab, idx) => (
-                    <tr key={idx} className="border-t border-slate-700">
-                      <td className="py-2 px-3">{lab.name}</td>
-                      <td className="py-2 px-3">{lab.capacity}</td>
-                      <td className="py-2 px-3">{lab.location}</td>
+                    <tr
+                      key={lab.id}
+                      className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200"
+                    >
+                      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {idx + 1}
+                      </th>
+                      <td className="px-6 py-4">{lab.name}</td>
+                      <td className="px-6 py-4">{lab.capacity}</td>
+                      <td className="px-6 py-4">{lab.location}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </div>
-          </div>
-          <div className="bg-[#1E293B] shadow rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
-            <div className="flex flex-wrap gap-4">
-              <button className="px-4 py-2 bg-purple-500 text-white rounded-lg shadow hover:bg-purple-600">
-                Add Lab
-              </button>
-              <button className="px-4 py-2 bg-cyan-500 text-white rounded-lg shadow hover:bg-cyan-600">
-                Assign PC
-              </button>
-              <button className="px-4 py-2 bg-pink-500 text-white rounded-lg shadow hover:bg-pink-600">
-                Register Student
-              </button>
             </div>
           </div>
         </div>

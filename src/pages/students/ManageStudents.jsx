@@ -11,19 +11,19 @@ const ManageStudents = () => {
     const [input, setInput] = useState({ name: '', mail: '', grid: '', labId: '', pcId: '' })
     const [isEdit, setIsEdit] = useState()
     const [filteredPc, setIsFilteredPc] = useState([])
-
+    
     const { studentId } = useParams()
-
+    
     const { labs } = useContext(LabContext)
     const { pcs } = useContext(PcContext)
     const { addStudent, updateStudent } = useContext(studentContext)
-
+    
     const navigate = useNavigate()
-
+    
     useEffect(() => {
         if (input.labId) {
             const filterPc = pcs.filter((pc) => {
-                return input.labId === pc.labId && pc.status == "available"
+                return input.labId === pc.labId && pc.status == "Available"
             })
             setIsFilteredPc(filterPc)
         }
