@@ -46,35 +46,33 @@ const ManagePcs = () => {
     }
 
     return (
-        <div className="container mx-auto my-5">
-            <h2 className="text-3xl text-center">{!isEdit ? "Add" : "Edit"} PC</h2>
-            <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-                <div className="mb-5">
-                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">PC Name</label>
-                    <input type="text" onChange={handleChange} value={input.name} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+        <div className="bg-[#37353E] min-h-screen py-10">
+            <div className="container mx-auto">
+                <div className="max-w-md mx-auto bg-[#44444E] rounded-xl shadow p-6">
+                    <h2 className="text-3xl font-bold text-center text-[#D3DAD9] mb-6">
+                        {!isEdit ? "Add" : "Edit"} PC
+                    </h2>
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                        <div className="mb-5">
+                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-slate-200">PC Name</label>
+                            <input type="text" onChange={handleChange} value={input.name} id="name" className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5" />
+                        </div>
+                        <div className="mb-5">
+                            <label htmlFor="labId" className="block mb-2 text-sm font-medium text-slate-200">Lab Name</label>
+                            <select id="labId" onChange={handleChange} value={input.labId ? input.labId : ""} className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5">
+                                <option value="">Select Lab</option>
+                                {
+                                    labs.map((lab) => {
+                                        return lab.spaceLeft <= 0 ? "" : <option key={lab.id} value={lab.id}>{lab.name}</option>
+                                    })
+                                }
+                            </select>
+                        </div>
+                        <button type="submit" className="w-full px-3 py-2 bg-[#DED0B6] text-[#0C0C0C] rounded-md text-sm font-semibold hover:bg-[#FAEED1] transition">{!isEdit ? "Add" : "Update"} PC</button>
+                    </form>
                 </div>
-                <div className="mb-5">
-                    <label htmlFor="labId" className="block mb-2 text-sm font-medium text-gray-900">Lab Name</label>
-                    <select id="labId" onChange={handleChange} value={input.labId ? input.labId : ""} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value="">Select Lab</option>
-                        {
-                            labs.map((lab) => {
-                                return lab.spaceLeft <= 0 ? "" : <option key={lab.id} value={lab.id}>{lab.name}</option>
-                            })
-                        }
-                    </select>
-                </div>
-                {/* <div className="mb-5">
-                    <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900">Status</label>
-                    <select id="status" onChange={handleChange} value={input.status} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option>Select Status</option>
-                        <option value="available">Available</option>
-                        <option value="occupied">Occupied</option>
-                        <option value="maintainance">Maintainance</option>
-                    </select>
-                </div> */}
-                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">{!isEdit ? "Add" : "Update"} PC</button>
-            </form>
+
+            </div>
         </div>
     )
 }

@@ -53,10 +53,10 @@ const ManageLab = () => {
     }
 
     return (
-        <div className="bg-[#0f172a] min-h-screen py-10">
+        <div className="bg-[#37353E] min-h-screen py-10">
             <div className="container mx-auto">
-                <div className="max-w-md mx-auto bg-[#1e293b] rounded-xl shadow p-6">
-                    <h2 className="text-3xl font-bold text-center text-purple-400 mb-6">
+                <div className="max-w-md mx-auto bg-[#44444E] rounded-xl shadow p-6">
+                    <h2 className="text-3xl font-bold text-center text-[#D3DAD9] mb-6">
                         {!isEdit ? "Add" : "Edit"} Lab
                     </h2>
                     <form onSubmit={handleSubmit} className="space-y-5">
@@ -71,7 +71,7 @@ const ManageLab = () => {
                                 onChange={handleChange}
                                 value={input.name}
                                 id="name"
-                                className="bg-[#2E3A59] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
+                                className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
                             />
                         </div>
 
@@ -86,7 +86,7 @@ const ManageLab = () => {
                                 onChange={handleChange}
                                 value={input.capacity}
                                 id="capacity"
-                                className="bg-[#2E3A59] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
+                                className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
                             />
                         </div>
 
@@ -101,12 +101,12 @@ const ManageLab = () => {
                                 onChange={handleChange}
                                 value={input.location}
                                 id="location"
-                                className="bg-[#2E3A59] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
+                                className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
                             />
                         </div>
                         <button
                             type="submit"
-                            className="w-full px-3 py-2 bg-sky-500 text-white rounded-md text-sm font-medium hover:bg-sky-600 transition"
+                            className="w-full px-3 py-2 bg-[#DED0B6] text-[#0C0C0C] rounded-md text-sm font-semibold hover:bg-[#FAEED1] transition"
                         >
                             {!isEdit ? "Add" : "Update"} Lab
                         </button>

@@ -1,0 +1,243 @@
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-Medium.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-Light.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-Semibold.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-Semibold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-Regular.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-Medium.woff2') format('woff2'),
+        url('AtypTextTRIAL-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-Italic.woff2') format('woff2'),
+        url('AtypTextTRIAL-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-LightItalic.woff2') format('woff2'),
+        url('AtypTextTRIAL-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-Light.woff2') format('woff2'),
+        url('AtypTextTRIAL-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-SemiboldItalic.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-SemiboldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-BoldItalic.woff2') format('woff2'),
+        url('AtypTextTRIAL-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-Bold.woff2') format('woff2'),
+        url('AtypTextTRIAL-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-BoldItalic.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-Bold.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-Semibold.woff2') format('woff2'),
+        url('AtypTextTRIAL-Semibold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-MediumItalic.woff2') format('woff2'),
+        url('AtypTextTRIAL-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-Regular.woff2') format('woff2'),
+        url('AtypTextTRIAL-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Text TRIAL';
+    src: url('AtypTextTRIAL-SemiboldItalic.woff2') format('woff2'),
+        url('AtypTextTRIAL-SemiboldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Kido TRIAL';
+    src: url('AtypKidoTRIAL-Light.woff2') format('woff2'),
+        url('AtypKidoTRIAL-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-LightItalic.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Kido TRIAL';
+    src: url('AtypKidoTRIAL-Bold.woff2') format('woff2'),
+        url('AtypKidoTRIAL-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-Italic.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Display TRIAL';
+    src: url('AtypDisplayTRIAL-MediumItalic.woff2') format('woff2'),
+        url('AtypDisplayTRIAL-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Kido TRIAL';
+    src: url('AtypKidoTRIAL-Medium.woff2') format('woff2'),
+        url('AtypKidoTRIAL-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Kido TRIAL';
+    src: url('AtypKidoTRIAL-Semibold.woff2') format('woff2'),
+        url('AtypKidoTRIAL-Semibold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Kido TRIAL';
+    src: url('AtypKidoTRIAL-Thin.woff2') format('woff2'),
+        url('AtypKidoTRIAL-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp TEST Variable';
+    src: url('AtypTEST-Variable.woff2') format('woff2'),
+        url('AtypTEST-Variable.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atyp Kido TRIAL';
+    src: url('AtypKidoTRIAL-Regular.woff2') format('woff2'),
+        url('AtypKidoTRIAL-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

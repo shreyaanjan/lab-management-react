@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+*{
+  font-family: 'Atyp Display TRIAL';
+}
 .errorpage {
   background-image: url('../public/images/page-not-found.jpg');
   height: 500px;
@@ -79,4 +81,8 @@
 
 .scrollbar{
   scrollbar-width: none;
+}
+
+.heigth-cus{
+  height: calc(100vh - 73px);
 }
