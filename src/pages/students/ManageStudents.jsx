@@ -23,7 +23,7 @@ const ManageStudents = () => {
     useEffect(() => {
         if (input.labId) {
             const filterPc = pcs.filter((pc) => {
-                return input.labId === pc.labId && pc.status == "Available"
+                return input.labId === pc.labId && pc.status == "available"
             })
             setIsFilteredPc(filterPc)
         }

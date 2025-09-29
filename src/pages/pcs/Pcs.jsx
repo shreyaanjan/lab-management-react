@@ -2,11 +2,15 @@ import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { PcContext } from "../../context/PcContextProvider"
 import { LabContext } from "../../context/LabContextProvider"
+import { useId } from "react"
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
+import { Badge } from "@/components/ui/badge"
 
 const Pcs = () => {
   const navigate = useNavigate()
-
-  const { pcs, deletePc, showLab } = useContext(PcContext)
+  const id = useId()
+  const { pcs, deletePc, showLab, handleRepair } = useContext(PcContext)
   const { labs } = useContext(LabContext)
 
   return (
@@ -39,6 +43,9 @@ const Pcs = () => {
                   <th scope="col" className="px-6 py-3 tracking-wider">
                     Action
                   </th>
+                  <th scope="col" className="px-6 py-3 tracking-wider">
+                    Check In-Repair
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -55,14 +62,29 @@ const Pcs = () => {
                         {showLab(pc.labId)}
                       </td>
                       <td className="px-6 py-3 tracking-wider">
-                        {pc.status}
+                        <Badge className={`${pc.status == 'in-repair' ? "bg-[red]": pc.status == 'occupied' ? "bg-orange-600" : "bg-green-600"}`}>{pc.status}</Badge>
                       </td>
                       <td className="px-6 py-3 tracking-wider">
                         {pc.createdAt.toDate().toLocaleDateString()}
                       </td>
+                      <td className="px-6 py-4 tracking-wider ">
+                        <div className="flex items-center gap-3">
+                          <button onClick={() => navigate(`/edit-pc/${pc.pcId}`)} className="font-medium text-green-600 dark:text-green-500 hover:underline">Edit</button>
+                          <button onClick={() => deletePc(pc.pcId, pc.labId)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                        </div>
+                      </td>
                       <td className="px-6 py-4 tracking-wider flex items-center gap-3">
-                        <button onClick={() => navigate(`/edit-pc/${pc.pcId}`)} className="font-medium text-green-600 dark:text-green-500 hover:underline">Edit</button>
-                        <button onClick={() => deletePc(pc.pcId)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                        <div className="inline-flex items-center gap-2">
+                          <Switch
+                            id={id}
+                            checked={pc.status == "in-repair"}
+                            onClick={() => handleRepair(pc.pcId, pc.status)}
+                            className="data-[state=unchecked]:border-[#37353e] data-[state=unchecked]:[&_span]:bg-[#37353e] data-[state=unchecked]:bg-transparent data-[state=checked]:bg-[#37353e] [&_span]:transition-all data-[state=unchecked]:[&_span]:size-4 data-[state=unchecked]:[&_span]:translate-x-0.5 data-[state=unchecked]:[&_span]:shadow-none data-[state=unchecked]:[&_span]:rtl:-translate-x-0.5"
+                          />
+                          <Label htmlFor={id} className="sr-only">
+                            M3-style switch
+                          </Label>
+                        </div>
                       </td>
                     </tr>
                   })

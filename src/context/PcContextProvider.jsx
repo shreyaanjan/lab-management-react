@@ -7,7 +7,6 @@ import { toast } from "react-toastify"
 export const PcContext = createContext()
 
 const PcContextProvider = ({ children }) => {
-    const [flag, setFlag] = useState(false)
     const [pcs, setPcs] = useState([])
     const collectionRef = (collection(db, "pcs"))
     const { labs, fetchLab } = useContext(LabContext)
@@ -21,7 +20,7 @@ const PcContextProvider = ({ children }) => {
             await addDoc(collectionRef, {
                 createdAt: new Date(),
                 ...pc,
-                status: "Available"
+                status: "available"
             })
             await updateDoc(doc(db, "labs", pc.labId), {
                 spaceLeft: increment(-1)
@@ -94,18 +93,23 @@ const PcContextProvider = ({ children }) => {
             return "Not Assigned"
         }
     }
-    const handleStatus = async (pcId) => {
-        await updateDoc(doc(db, "pcs", pcId), { status: "in-Repair" })
-        setFlag(true)
-        fetchPc()
-    }
-    const handleAvail = async (pcId) => {
-        await updateDoc(doc(db, "pcs", pcId), { status: "Available" })
-        setFlag(false)
+
+    const handleRepair = async (pcId, status) => {
+        console.log("hello");
+        
+        if (status == "available" || status == "occupied") {
+            await updateDoc(doc(db, "pcs", pcId), {
+                status: "in-repair"
+            })
+        } else if (status == "in-repair") {
+            await updateDoc(doc(db, "pcs", pcId), {
+                status: "available"
+            })
+        }
         fetchPc()
     }
 
-    const value = { addPc, pcs, deletePc, updatePc, showLab, fetchPc, handleStatus, handleAvail, flag }
+    const value = { addPc, pcs, deletePc, updatePc, showLab, fetchPc, handleRepair }
     return (
         <PcContext.Provider value={value}>
             {children}
