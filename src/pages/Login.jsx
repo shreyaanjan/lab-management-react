@@ -1,9 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthContextProvider"
 import { useNavigate } from "react-router-dom"
-import { signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../config/firebase"
-
 
 const Login = () => {
     const [input, setInput] = useState({ email: '', password: '' })
@@ -24,20 +21,56 @@ const Login = () => {
         e.preventDefault()
         let res = await handleLogin(input.email, input.password)
     }
-    
+
     return (
-        <div className="my-10">
-            <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-                <div className="mb-5">
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                    <input type="email" onChange={handleChange} value={input.email} id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@flowbite.com" />
-                </div>
-                <div className="mb-5">
-                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Your password</label>
-                    <input type="password" onChange={handleChange} value={input.password} id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                </div>
-                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
-            </form>
+        <div className="bg-[#f9fafb] height flex items-center justify-center py-14">
+            <div className="w-full max-w-md bg-[#ffffff] rounded-2xl shadow-xl p-8 box-shadow">
+                <h2 className="text-3xl font-bold text-center text-[#111827] mb-5 tracking-wide">
+                    Welcome Back
+                </h2>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                        <label htmlFor="email" className="block mb-2 text-sm font-semibold text-[#374151]">
+                            Email Address
+                        </label>
+                        <input type="email"
+                            id="email"
+                            onChange={handleChange}
+                            value={input.email}
+                            className="bg-[#f9fafb] border border-gray-400 text-[#111827] text-sm rounded-md block w-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder:text-[#9ca3af]"
+                            placeholder="you@example.com"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor="password"
+                            className="block mb-2 text-sm font-semibold text-[#374151]"
+                        >
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={handleChange}
+                            value={input.password}
+                            className="bg-[#f9fafb] border border-gray-400 text-[#111827] text-sm rounded-md block w-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder:text-[#9ca3af]"
+                            placeholder="••••••••"
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full mt-4 px-4 py-2 font-semibold main-btn"
+                    >
+                        Login
+                    </button>
+                </form>
+                <p className="text-center text-sm text-[#4b5563] mt-6">
+                    Don’t have an account?{" "}
+                    <a href="#" className="text-[#e81e28] font-medium hover:underline">
+                        Sign up
+                    </a>
+                </p>
+            </div>
         </div>
     )
 }

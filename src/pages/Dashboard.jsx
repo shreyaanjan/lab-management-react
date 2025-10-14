@@ -18,11 +18,11 @@ export default function DashboardChart() {
   const COLORS = ["#715A5A", "#37353E", "#44444E"];
 
   return (
-    <section className="bg-[#37353E] py-10 heigth-cus">
+    <section className="bg-[#f5f5f5] py-10 heigth-cus">
       <div className="container mx-auto p-4">
         <div className="flex flex-col lg:flex-row gap-5">
-          <div className="bg-[#D3DAD9] w-full lg:w-4/12 shadow-xl rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">System Overview</h2>
+          <div className="bg-[#fefefe] w-full lg:w-4/12 shadow-xl rounded-lg p-6">
+            <h2 className="text-lg font-semibold text-gray-800 uppercase mb-4">System Overview</h2>
             <div className="w-full h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -42,15 +42,14 @@ export default function DashboardChart() {
                   <Legend />
                 </PieChart>
               </ResponsiveContainer>
-            </div>
-
+            </div>  
           </div>
-          <div className="bg-[#D3DAD9] w-full lg:w-8/12 shadow-lg rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Lab Details</h2>
+          <div className="bg-[#fefefe] w-full lg:w-8/12 shadow-lg rounded-lg p-6">
+            <h2 className="text-lg font-semibold uppercase text-gray-800 mb-4">Lab Details</h2>
             <div className="w-full h-64 overflow-y-auto scrollbar">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                  <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+                  <thead className="text-md text-gray-600 uppercase bg-[#f5f5f5]">
                     <tr>
                       <th scope="col" className="px-6 py-3 tracking-wider">Number</th>
                       <th scope="col" className="px-6 py-3 tracking-wider">Name</th>
@@ -62,9 +61,8 @@ export default function DashboardChart() {
                     {labs.map((lab, idx) => (
                       <tr
                         key={lab.id}
-                        className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200"
-                      >
-                        <th scope="row" className="px-7 py-4 font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                        className="odd:bg-white odd:dark:bg-gray-900 border-gray-200">
+                        <th scope="row" className="px-7 py-4 text-gray-600 whitespace-nowrap dark:text-white">
                           {idx + 1}
                         </th>
                         <td className="px-7 py-4 font-medium">{lab.name}</td>

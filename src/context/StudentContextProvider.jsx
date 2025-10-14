@@ -59,10 +59,19 @@ const StudentContextProvider = ({ children }) => {
         }
     }
 
-    const updateStudent = async (updatedVal, studentId) => {
+    const updateStudent = async (updatedVal, studentId, pcId) => {
         try {
             await updateDoc(doc(db, "students", studentId), updatedVal)
+            await updateDoc(doc(db, "pcs", updatedVal.pcId), {
+                status: "occupied",
+            })
+            if (pcId && pcId !== updatedVal.pcId) {
+                await updateDoc(doc(db, "pcs", pcId), {
+                    status: "available",
+                })
+            }
             fetchStudent()
+            fetchPc()
         } catch (error) {
             console.log(error);
             toast.error("Something Went Wrong !")

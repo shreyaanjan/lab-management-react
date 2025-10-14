@@ -11,11 +11,11 @@ const Students = () => {
   const { showLab } = useContext(PcContext)
 
   return (
-    <section className="bg-[#37353E] py-10 heigth-cus">
+    <section className="bg-[#f9fafb] py-10 heigth-cus box-shadow">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          <h2 className="text-3xl text-[#D3DAD9] uppercase font-semibold">Students Details</h2>
-          <button onClick={() => navigate('/add-student')} className="px-4 py-2 rounded-lg bg-[#DED0B6] text-[#0C0C0C] font-semibold hover:bg-[#FAEED1] transition-colors">Add Student</button>
+          <h2 className="text-2xl text-black uppercase font-semibold">Students Details</h2>
+          <button onClick={() => navigate('/add-student')} className="px-4 py-1 font-semibold main-btn">Add Student</button>
         </div>
         <div className="my-5">
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -74,7 +74,7 @@ const Students = () => {
                         {student.createdAt.toDate().toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 tracking-wider flex items-center gap-3">
-                        <button onClick={() => navigate(`/edit-student/${student.studentId}`)} className="font-medium text-green-600 dark:text-green-500 hover:underline">Edit</button>
+                        <button onClick={() => navigate(`/edit-student/${student.studentId}/${student.pcId}`)} className="font-medium text-green-600 dark:text-green-500 hover:underline">Edit</button>
                         <button onClick={() => deleteStudent(student.studentId)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                       </td>
                     </tr>

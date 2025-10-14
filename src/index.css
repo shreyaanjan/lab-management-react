@@ -1,15 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*{
-  font-family: 'Atyp Display TRIAL';
+@import url('https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap');
+
+* {
+  font-family: "Livvic", sans-serif;
 }
+
+.height {
+  height: calc(100vh-76px);
+}
+
 .errorpage {
   background-image: url('../public/images/page-not-found.jpg');
   height: 500px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.box-shadow {
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.main-btn {
+  background-color: #ea5455;
+  transition: all 0.3s ease-out;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  color: white;
+}
+
+.main-btn:hover {
+  background-color: transparent;
+  color: black;
+  border: 2px solid #e81e28;
+  transition: all 0.3s 0s ease-out;
 }
 
 @layer base {
@@ -69,20 +95,10 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-.scrollbar{
+.scrollbar {
   scrollbar-width: none;
 }
 
-.heigth-cus{
-  height: calc(100vh - 73px);
+.heigth-cus {
+  height: calc(100vh - 76px);
 }

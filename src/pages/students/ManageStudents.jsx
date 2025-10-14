@@ -11,15 +11,15 @@ const ManageStudents = () => {
     const [input, setInput] = useState({ name: '', mail: '', grid: '', labId: '', pcId: '' })
     const [isEdit, setIsEdit] = useState()
     const [filteredPc, setIsFilteredPc] = useState([])
-    
-    const { studentId } = useParams()
-    
+
+    const { studentId, pcId } = useParams()
+
     const { labs } = useContext(LabContext)
     const { pcs } = useContext(PcContext)
     const { addStudent, updateStudent } = useContext(studentContext)
-    
+
     const navigate = useNavigate()
-    
+
     useEffect(() => {
         if (input.labId) {
             const filterPc = pcs.filter((pc) => {
@@ -45,7 +45,7 @@ const ManageStudents = () => {
             await addStudent(input)
             navigate("/students")
         } else {
-            await updateStudent(input, studentId)
+            await updateStudent(input, studentId, pcId)
             navigate("/students")
         }
     }
@@ -59,96 +59,60 @@ const ManageStudents = () => {
     }
 
     return (
-        <div className="bg-[#37353E] min-h-screen py-10">
-            <div className="container mx-auto">
-                <div className="max-w-md mx-auto bg-[#44444E] rounded-xl shadow p-6">
-                    <h2 className="text-3xl font-bold text-center text-[#D3DAD9] mb-6">
-                        {!isEdit ? "Add" : "Edit"} Student
-                    </h2>
-                    <form onSubmit={handleSubmit} className="space-y-5">
-
-                        <div>
-                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-slate-200">
-                                Student Name
-                            </label>
-                            <input
-                                type="text"
-                                onChange={handleChange}
-                                value={input.name}
-                                id="name"
-                                className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="mail" className="block mb-2 text-sm font-medium text-slate-200">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                onChange={handleChange}
-                                value={input.mail}
-                                id="mail"
-                                className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="grid" className="block mb-2 text-sm font-medium text-slate-200">
-                                GRID
-                            </label>
-                            <input
-                                type="number"
-                                onChange={handleChange}
-                                value={input.grid}
-                                id="grid"
-                                className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="labId" className="block mb-2 text-sm font-medium text-slate-200">
-                                Lab Name
-                            </label>
-                            <select
-                                id="labId"
-                                onChange={handleChange}
-                                value={input.labId}
-                                className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
-                            >
-                                <option value="">Select Lab</option>
-                                {labs.map((lab) => (
-                                    <option key={lab.id} value={lab.id}>{lab.name}</option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div>
-                            <label htmlFor="pcId" className="block mb-2 text-sm font-medium text-slate-200">
-                                PC Name
-                            </label>
-                            <select
-                                id="pcId"
-                                onChange={handleChange}
-                                value={input.pcId}
-                                className="bg-[#37353E] border border-gray-600 text-slate-200 text-sm rounded-md focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5"
-                            >
-                                <option value="">Select PC</option>
-                                {filteredPc.map((pc) => (
-                                    <option key={pc.pcId} value={pc.pcId}>{pc.name}</option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="w-full px-3 py-2 bg-[#DED0B6] text-[#0C0C0C] font-semibold rounded-md text-sm hover:bg-[#FAEED1] transition"
-                        >
-                            {!isEdit ? "Add" : "Update"} Student
-                        </button>
-                        
-                    </form>
-                </div>
+        <div className="bg-[#f9fafb] min-h-screen flex items-center justify-center py-14">
+            <div className="w-full max-w-md bg-[#ffffff] rounded-2xl shadow-xl p-8 box-shadow">
+                <h2 className="text-3xl font-bold text-center text-[#111827] mb-5 tracking-wide">
+                    {!isEdit ? "Add" : "Edit"} Student
+                </h2>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                        <label htmlFor="name" className="block mb-2 text-sm font-semibold text-[#374151]">
+                            Student Name
+                        </label>
+                        <input type="text" onChange={handleChange} value={input.name} id="name"
+                            className="bg-[#f9fafb] border border-gray-400 text-[#111827] text-sm rounded-md block w-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder:text-[#9ca3af]" />
+                    </div>
+                    <div>
+                        <label htmlFor="mail" className="block mb-2 text-sm font-semibold text-[#374151]">
+                            Email
+                        </label>
+                        <input type="email" onChange={handleChange} value={input.mail} id="mail"
+                            className="bg-[#f9fafb] border border-gray-400 text-[#111827] text-sm rounded-md block w-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder:text-[#9ca3af]" />
+                    </div>
+                    <div>
+                        <label htmlFor="grid" className="block mb-2 text-sm font-semibold text-[#374151]">
+                            GRID
+                        </label>
+                        <input type="number" onChange={handleChange} value={input.grid} id="grid"
+                            className="bg-[#f9fafb] border border-gray-400 text-[#111827] text-sm rounded-md block w-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder:text-[#9ca3af]" />
+                    </div>
+                    <div>
+                        <label htmlFor="labId" className="block mb-2 text-sm font-semibold text-[#374151]">
+                            Lab Name
+                        </label>
+                        <select id="labId" onChange={handleChange} value={input.labId}
+                            className="bg-[#f9fafb] border border-gray-400 text-[#111827] text-sm rounded-md block w-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder:text-[#9ca3af]">
+                            <option value="">Select Lab</option>
+                            {labs.map((lab) => (
+                                <option key={lab.id} value={lab.id}>{lab.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="pcId" className="block mb-2 text-sm font-semibold text-[#374151]">
+                            PC Name
+                        </label>
+                        <select id="pcId" onChange={handleChange} value={input.pcId} className="bg-[#f9fafb] border border-gray-400 text-[#111827] text-sm rounded-md block w-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder:text-[#9ca3af]">
+                            <option value="">Select PC</option>
+                            {filteredPc.map((pc) => (
+                                <option key={pc.pcId} value={pc.pcId}>{pc.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <button type="submit" className="w-full mt-4 px-4 py-2 font-semibold main-btn">
+                        {!isEdit ? "Add" : "Update"} Student
+                    </button>
+                </form>
             </div>
         </div>
     )
