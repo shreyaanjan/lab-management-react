@@ -33,10 +33,7 @@ const Login = () => {
                         <label htmlFor="email" className="block mb-2 text-sm font-semibold text-[#374151]">
                             Email Address
                         </label>
-                        <input type="email"
-                            id="email"
-                            onChange={handleChange}
-                            value={input.email}
+                        <input type="email" id="email" onChange={handleChange} value={input.email}
                             className="bg-[#f9fafb] border border-gray-400 text-[#111827] text-sm rounded-md block w-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder:text-[#9ca3af]"
                             placeholder="you@example.com"
                         />
