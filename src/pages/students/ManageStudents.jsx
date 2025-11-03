@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { doc, getDoc } from "firebase/firestore"
 import { db } from "../../config/firebase"
 import { Settings } from "lucide-react"
+import { toast } from "react-toastify"
 
 const ManageStudents = () => {
     const [input, setInput] = useState({ name: '', mail: '', grid: '', labId: '', pcId: '' })
@@ -40,15 +41,27 @@ const ManageStudents = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        if (!isEdit) {
-            await addStudent(input)
-            navigate("/students")
-        } else {
-            await updateStudent(input, studentId, pcId)
-            navigate("/students")
+        e.preventDefault();
+        if (input.name.trim() === "" || input.mail.trim() === "" || input.grid.trim() === "" || input.labId.trim() === "" || input.pcId.trim() === "") {
+            toast.error("Enter all student details correctly!");
+            return;
         }
-    }
+
+        try {
+            if (!isEdit) {
+                await addStudent(input);
+                toast.success("Student Added Successfully!");
+                navigate("/students");
+            } else {
+                await updateStudent(input, studentId, pcId);
+                toast.success("Student Updated Successfully!");
+                navigate("/students");
+            }
+        } catch (error) {
+            toast.error("Something Went Wrong! Please Try Again.");
+            console.error(error);
+        }
+    };
 
     const getStudent = async () => {
         const studentData = await getDoc(doc(db, "students", studentId))

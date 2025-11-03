@@ -4,6 +4,7 @@ import { PcContext } from "../../context/PcContextProvider"
 import { useNavigate, useParams } from "react-router-dom"
 import { doc, getDoc } from "firebase/firestore"
 import { db } from "../../config/firebase"
+import { toast } from "react-toastify"
 
 const ManagePcs = () => {
     const [input, setInput] = useState({ name: '', labId: '', status: '' })
@@ -27,15 +28,38 @@ const ManagePcs = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        if (isEdit) {
-            await updatePc(pcId, input, labId)
-            navigate("/pcs")
+        e.preventDefault();
+
+        if (!isEdit) {
+            if (input.name.trim() === '' || input.labId.trim() === '') {
+                toast.error("Enter all PC details Correctly !");
+                return;
+            }
+
+            try {
+                await addPc(input);
+                toast.success("PC added successfully!");
+                navigate("/pcs");
+            } catch (error) {
+                toast.error("Failed to add PC!");
+                console.error(error);
+            }
         } else {
-            await addPc(input)
-            navigate("/pcs")
+            if (input.name.trim() === '' || input.labId.trim() === '') {
+                toast.error("Enter all PC details to Update !");
+                return;
+            }
+
+            try {
+                await updatePc(pcId, input, labId);
+                toast.success("PC Updated Successfully!");
+                navigate("/pcs");
+            } catch (error) {
+                toast.error("Failed to update PC!");
+                console.error(error);
+            }
         }
-    }
+    };
 
     const getPc = async () => {
         const pcData = await getDoc(doc(db, "pcs", pcId))
